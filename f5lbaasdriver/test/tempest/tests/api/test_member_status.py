@@ -1,5 +1,4 @@
-# Copyright 2015 Hewlett-Packard Development Company, L.P.
-# Copyright 2016 Rackspace Inc.
+# Copyright 2017 F5 Networks Inc.
 # All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -145,6 +144,12 @@ class MemberStatusTestJSON(base.F5BaseTestCase):
         expected_status = lb_const.OFFLINE
         assert self._wait_for_member_status(member,
                                             expected_status) == expected_status
+
+        # verify degraded state for loadbalancer
+        status_tree = self.load_balancers_client.\
+            get_load_balancer_status_tree(self.load_balancer_id)
+        lb_status = status_tree.get('loadbalancer').get('operating_status')
+        assert lb_status == lb_const.DEGRADED
 
     @decorators.skip_because(bug="497")
     def test_disabled(self):
