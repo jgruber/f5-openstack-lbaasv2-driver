@@ -79,7 +79,7 @@ version = VERSION
 release = VERSION
 
 # OpenStack release
-openstack_release = "Mitaka"
+openstack_release = "Newton"
 
 #rst_prolog = '''
 #'''
@@ -319,7 +319,7 @@ texinfo_documents = [
 
 # intersphinx: refer to other F5 OpenStack documentation sets.
 
-f5_lbaasv2_driver_shim_version = '9.1.0'
+f5_lbaasv2_driver_shim_version = '10.0.0'
 f5_lbaasv2_driver_shim_url = 'https://github.com/F5Networks/neutron-lbaas/releases/download/v%s/f5.tgz' % f5_lbaasv2_driver_shim_version
 
 #intersphinx_mapping = {'heat': (

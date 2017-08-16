@@ -13,7 +13,8 @@
 # limitations under the License.
 #
 
-export BRANCH := mitaka
+# Fixing branch to that specified in the public fork. This is necessary for build on PRs.
+export BRANCH := stable/newton
 export GIT_REMOTE_URL := $(shell git config --get remote.origin.url)
 # The below operations are used for the builds on PR. The two variables are defined by the
 # Github Pull Request Builder plugin for Jenkins. --> ghprb...
@@ -50,14 +51,14 @@ export TEMPEST_REPO := http://git.openstack.org/openstack/tempest
 # neutron-lbaas (OpenStack Neutron LBaaS repo for the test cases to run)
 export NEUTRON_LBAAS_DIR := /home/jenkins/neutron-lbaas
 export NEUTRON_LBAAS_REPO := https://github.com/F5Networks/neutron-lbaas.git
-export NEUTRON_LBAAS_BRANCH := stable/mitaka
+export NEUTRON_LBAAS_BRANCH := stable/newton
 export UPPER_CONSTRAINTS_FILE := https://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt?h=$(NEUTRON_LBAAS_BRANCH)
 
 # TLC path and python path requirements
 export PATH := /tools/bin:$(PATH)
 export PYTHONPATH := /tools/lib:/tools/bin:$(PYTHONPATH)
 export USER := jenkins
-export TEST_OPENSTACK_DISTRO := mitaka
+export TEST_OPENSTACK_DISTRO := newton
 export TEST_CIRROS_IMAGE := cirros-0.3.4-x86_64-disk.qcow2
 export TEST_OPENSTACK_NODE_COUNT := 3
 export TEST_OPENSTACK_DEPLOY := multinode
