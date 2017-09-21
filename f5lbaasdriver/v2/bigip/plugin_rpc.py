@@ -137,6 +137,23 @@ class LBaaSv2PluginCallbacksRPC(object):
                     lb_status[lbid] = 'Unknown'
         return lb_status
 
+    # validate a list of listeners id - assure they are not deleted
+    @log_helpers.log_method_call
+    def validate_listeners_state(self, context, listeners, host=None):
+        listener_status = {}
+        for listenerid in listeners:
+            with context.session.begin(subtransactions=True):
+                try:
+                    listener_db = self.driver.plugin.db.get_listener(
+                        context, listenerid)
+                    listener_status[listenerid] = \
+                        listener_db.provisioning_status
+                except Exception as e:
+                    LOG.error('Exception: get_listener: %s',
+                              e.message)
+                    listener_status[listenerid] = 'Unknown'
+        return listener_status
+
     # validate a list of pools id - assure they are not deleted
     @log_helpers.log_method_call
     def validate_pools_state(self, context, pools, host=None):
